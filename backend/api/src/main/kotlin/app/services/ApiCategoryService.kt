@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 import scheduler.ports.api.CategoryRepository
 
 @Component
-class CategoryService(
+class ApiCategoryService(
     private val categoryResponseSerializer: CategoryResponseSerializer,
     private val categoryRepository: CategoryRepository) {
 

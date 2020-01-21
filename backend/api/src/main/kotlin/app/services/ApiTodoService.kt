@@ -11,7 +11,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 @Component
-class TodoService(
+class ApiTodoService(
     private val todoResponseSerializer: TodoResponseSerializer,
     private val todoRepository: TodoRepository) {
 

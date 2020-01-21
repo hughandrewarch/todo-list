@@ -2,28 +2,28 @@ package app.controllers
 
 import app.models.category.CategoryCreateRequest
 import app.models.category.CategoryResponse
-import app.services.CategoryService
+import app.services.ApiCategoryService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
-@RestController("/category")
-class CategoryController(private val service: CategoryService) {
+@RestController
+class CategoryController(private val service: ApiCategoryService) {
 
-    @GetMapping
-    fun schedule(): List<CategoryResponse> {
+    @GetMapping("/category")
+    fun categories(): List<CategoryResponse> {
         return service.findAll()
     }
 
-    @PostMapping
+    @PostMapping("/category")
     @ResponseStatus(HttpStatus.CREATED)
-    fun createTodo(@Valid @RequestBody request: CategoryCreateRequest): CategoryResponse {
+    fun createCategory(@Valid @RequestBody request: CategoryCreateRequest): CategoryResponse {
         return service.create(request)
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/category/{id}")
     @ResponseStatus(HttpStatus.OK)
-    fun deleteTodo(@PathVariable id: Long) {
+    fun deleteCategory(@PathVariable id: Long) {
         service.delete(id)
     }
 }
