@@ -1,0 +1,31 @@
+sourceSets {
+	contractTest {
+		kotlin {
+			srcDirs = ["src/contractTest/kotlin"]
+			compileClasspath += sourceSets.main.output
+			compileClasspath += sourceSets.test.output
+		}
+	}
+}
+
+task contractTestJar(type: Jar) {
+	classifier = 'contractTest'
+	from sourceSets.contractTest.output
+}
+
+configurations {
+	contractTest
+}
+
+artifacts {
+	contractTest contractTestJar
+}
+
+dependencies {
+	contractTestCompile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+	contractTestCompile("org.junit.jupiter:junit-jupiter-api:5.4.2")
+	contractTestRuntime("org.junit.jupiter:junit-jupiter-engine:5.4.2")
+
+	contractTestCompile 'org.assertj:assertj-core:3.10.0'
+}
