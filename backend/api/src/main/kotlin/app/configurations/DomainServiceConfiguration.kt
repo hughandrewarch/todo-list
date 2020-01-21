@@ -1,13 +1,12 @@
 package app.configurations
 
-import scheduler.services.TodoService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.jdbc.core.JdbcTemplate
-import scheduler.adapters.fake.FakeTodoRepository
+import scheduler.adapters.jdbc.JdbcCategoryRepository
 import scheduler.adapters.jdbc.JdbcTodoRepository
-import scheduler.models.Status
-import java.time.LocalDate
+import scheduler.services.CategoryService
+import scheduler.services.TodoService
 
 @Configuration
 class DomainServiceConfiguration {
@@ -15,11 +14,14 @@ class DomainServiceConfiguration {
     @Bean
     fun todoService(jdbcTemplate: JdbcTemplate): TodoService {
         val todoRepo = JdbcTodoRepository(jdbcTemplate)
-        val fakeRepo = FakeTodoRepository()
-
-        fakeRepo.create("a", "item a", Status.PENDING, LocalDate.of(2019, 1, 2))
-        fakeRepo.create("b", "item b", Status.PENDING, LocalDate.of(2019, 3, 4))
 
         return TodoService(todoRepo)
+    }
+
+    @Bean
+    fun categoryService(jdbcTemplate: JdbcTemplate): CategoryService {
+        val categoryRepo = JdbcCategoryRepository(jdbcTemplate)
+
+        return CategoryService(categoryRepo)
     }
 }
