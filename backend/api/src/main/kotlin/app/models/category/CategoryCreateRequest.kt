@@ -5,5 +5,5 @@ import com.fasterxml.jackson.annotation.JsonProperty
 data class CategoryCreateRequest(
 
         @JsonProperty("name")
-        var title: String
+        var name: String
 )
