@@ -1,15 +1,13 @@
 package app.serializers
 
-import app.models.TodoResponse
+import app.models.category.CategoryResponse
 import org.springframework.stereotype.Component
-import scheduler.models.Status
 import scheduler.models.Todo
-import java.time.LocalDate
 
 @Component
 class TodoResponseSerializer {
-    fun serialize(todo: Todo): TodoResponse {
-        return TodoResponse(
+    fun serialize(todo: Todo): CategoryResponse {
+        return CategoryResponse(
             todo.id,
             todo.title,
             todo.description,

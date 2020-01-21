@@ -1,4 +1,4 @@
-package app.models
+package app.models.todo
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

@@ -1,9 +1,9 @@
 package app.services
 
-import app.models.TodoCreateRequest
+import app.models.category.CategoryCreateRequest
 import scheduler.ports.api.TodoRepository
-import app.models.TodoResponse
-import app.models.TodoUpdateRequest
+import app.models.category.CategoryResponse
+import app.models.todo.TodoUpdateRequest
 import app.serializers.TodoResponseSerializer
 import org.springframework.stereotype.Component
 import scheduler.models.Status
@@ -15,7 +15,7 @@ class ApiTodoService(
     private val todoResponseSerializer: TodoResponseSerializer,
     private val todoRepository: TodoRepository) {
 
-    fun create(createRequest: TodoCreateRequest): TodoResponse {
+    fun create(createRequest: CategoryCreateRequest): CategoryResponse {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
         val todo = todoRepository.create(
@@ -27,11 +27,11 @@ class ApiTodoService(
         return todoResponseSerializer.serialize(todo)
     }
 
-    fun findAll(): List<TodoResponse> {
+    fun findAll(): List<CategoryResponse> {
         return todoRepository.findAll().map { todoResponseSerializer.serialize(it) }
     }
 
-    fun update(id: Long, updateRequest: TodoUpdateRequest): TodoResponse {
+    fun update(id: Long, updateRequest: TodoUpdateRequest): CategoryResponse {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
         val todo = todoRepository.update(
