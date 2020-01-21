@@ -1,6 +1,6 @@
 package app.configurations
 
-import almanac.services.TodoService
+import scheduler.services.TodoService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.jdbc.core.JdbcTemplate

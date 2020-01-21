@@ -8,5 +8,5 @@ interface TodoRepository {
     fun create(title: String, description: String, status: Status, due: LocalDate): Todo
     fun findAll(): List<Todo>
     fun delete(id: Long)
-    fun update(id: Long, title: String, description: String, valueOf: Status, parse: LocalDate): Todo
+    fun update(id: Long, title: String, description: String, status: Status, due: LocalDate): Todo
 }

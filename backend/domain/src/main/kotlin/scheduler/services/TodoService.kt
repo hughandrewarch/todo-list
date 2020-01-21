@@ -1,24 +1,24 @@
-package almanac.services
+package scheduler.services
 
 import scheduler.models.Status
 import scheduler.models.Todo
 import scheduler.ports.persistence.TodoRepository
 import java.time.LocalDate
 
-class TodoService(private val todoRepository: TodoRepository) {
+class TodoService(private val dataTodoRepository: TodoRepository) {
     fun create(title: String, description: String, status: Status, due: LocalDate): Todo {
-        return todoRepository.create(title, description, status, due)
+        return dataTodoRepository.create(title, description, status, due)
     }
 
     fun findAll(): List<Todo> {
-        return todoRepository.findAll()
+        return dataTodoRepository.findAll()
     }
 
     fun update(id: Long, title: String, description: String, status: Status, due: LocalDate): Todo {
-        return todoRepository.update(id, title, description, status, due)
+        return dataTodoRepository.update(id, title, description, status, due)
     }
 
     fun delete(id: Long) {
-        todoRepository.delete(id)
+        dataTodoRepository.delete(id)
     }
 }

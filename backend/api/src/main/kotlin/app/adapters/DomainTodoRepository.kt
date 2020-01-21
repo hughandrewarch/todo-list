@@ -1,6 +1,6 @@
 package app.adapters
 
-import almanac.services.TodoService
+import scheduler.services.TodoService
 import org.springframework.stereotype.Component
 import scheduler.models.Status
 import scheduler.models.Todo
