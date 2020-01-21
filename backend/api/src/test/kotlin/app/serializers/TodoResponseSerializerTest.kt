@@ -16,10 +16,10 @@ internal class TodoResponseSerializerTest {
 
         val serialized = subject.serialize(todo)
 
-        assertThat(todo.id).isEqualTo(1L)
-        assertThat(todo.title).isEqualTo("Groceries")
-        assertThat(todo.description).isEqualTo("Buy carrots")
-        assertThat(todo.status).isEqualTo(Status.PENDING)
-        assertThat(todo.due).isEqualTo("2020-02-03")
+        assertThat(serialized.id).isEqualTo(1L)
+        assertThat(serialized.title).isEqualTo("Groceries")
+        assertThat(serialized.description).isEqualTo("Buy carrots")
+        assertThat(serialized.status).isEqualTo(Status.PENDING)
+        assertThat(serialized.due).isEqualTo("2020-02-03")
     }
 }
