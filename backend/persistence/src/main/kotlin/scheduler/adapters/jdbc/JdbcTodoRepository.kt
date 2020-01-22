@@ -86,7 +86,34 @@ class JdbcTodoRepository(private val jdbcTemplate: JdbcTemplate) : TodoRepositor
             """delete from todo where id = ?""",
             id
         )
+    }
 
+    override fun addCategory(id: Long, catId: Long) {
+        jdbcTemplate.update(preparedStatementCreator(
+            """
+                insert into category_relation (todo_id, cat_id)
+                values
+                (?, ?)
+            """
+        ) { ps ->
+            ps.setLong(1, id)
+            ps.setLong(2, catId)
+        })
+    }
+
+    override fun removeCategory(id: Long, catId: Long) {
+        jdbcTemplate.update(preparedStatementCreator(
+            """
+                delete from category_relation
+                where
+                    todo_id = ?
+                and
+                    cat_id = ?
+            """
+        ) { ps ->
+            ps.setLong(1, id)
+            ps.setLong(2, catId)
+        })
     }
 }
 

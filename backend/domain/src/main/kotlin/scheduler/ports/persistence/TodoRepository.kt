@@ -10,4 +10,6 @@ interface TodoRepository {
     fun findAll(): List<Todo>
     fun delete(id: Long)
     fun update(id: Long, title: String, description: String, status: Status, due: LocalDate): Todo
+    fun addCategory(id: Long, catId: Long)
+    fun removeCategory(id: Long, catId: Long)
 }

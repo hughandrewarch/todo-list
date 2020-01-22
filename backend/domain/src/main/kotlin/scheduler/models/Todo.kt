@@ -7,7 +7,8 @@ data class Todo (
     val title: String,
     val description: String,
     val status: Status,
-    val due: LocalDate
+    val due: LocalDate,
+    val categories: List<Category> = emptyList()
 )
 
 enum class Status{

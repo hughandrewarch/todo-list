@@ -1,13 +1,14 @@
 package scheduler.ports.persistence
 
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import scheduler.exceptions.TodoNotFoundException
+import scheduler.models.Category
 import scheduler.models.Status
 import scheduler.models.Todo
 import java.time.LocalDate
-import java.util.*
 
 abstract class TodoRepositoryTest {
     private lateinit var subject: TodoRepository
@@ -28,7 +29,7 @@ abstract class TodoRepositoryTest {
             LocalDate.of(2019, 3, 4)
         )
 
-        Assertions.assertThat(createdTodo)
+        assertThat(createdTodo)
             .isEqualToIgnoringGivenFields(
                 Todo(
                     -1,
@@ -52,7 +53,7 @@ abstract class TodoRepositoryTest {
 
         val todo = subject.find(createdTodo.id)
 
-        Assertions.assertThat(todo).isEqualTo(
+        assertThat(todo).isEqualTo(
             Todo(
                 createdTodo.id,
                 "groceries",
@@ -66,7 +67,7 @@ abstract class TodoRepositoryTest {
     @Test
     fun `find throws exception when no todo found`() {
 
-        Assertions.assertThatThrownBy {
+        assertThatThrownBy {
             subject.find(-1L)
         }
             .isInstanceOf(TodoNotFoundException::class.java)
@@ -80,7 +81,7 @@ abstract class TodoRepositoryTest {
 
         val people = subject.findAll()
 
-        Assertions.assertThat(people).containsExactlyInAnyOrder(
+        assertThat(people).containsExactlyInAnyOrder(
             Todo(todoA.id, "a", "item a", Status.PENDING, LocalDate.of(2019, 1, 2)),
             Todo(todoB.id, "b", "item b", Status.PENDING, LocalDate.of(2019, 3, 4))
         )
@@ -103,7 +104,7 @@ abstract class TodoRepositoryTest {
             LocalDate.of(2019, 5, 6)
         )
 
-        Assertions.assertThat(todo).isEqualTo(
+        assertThat(todo).isEqualTo(
             Todo(
                 createdTodo.id,
                 "water plants",
@@ -133,7 +134,7 @@ abstract class TodoRepositoryTest {
 
         val todo = subject.find(createdTodo.id)
 
-        Assertions.assertThat(todo).isEqualTo(
+        assertThat(todo).isEqualTo(
             Todo(
                 createdTodo.id,
                 "water plants",
@@ -147,7 +148,7 @@ abstract class TodoRepositoryTest {
     @Test
     fun `update throws an exception when there is no todo to be updated`() {
 
-        Assertions.assertThatThrownBy {
+        assertThatThrownBy {
             subject.update(
                 -1L,
                 "water plants",
@@ -166,7 +167,7 @@ abstract class TodoRepositoryTest {
 
         subject.delete(todo.id)
 
-        Assertions.assertThatThrownBy {
+        assertThatThrownBy {
             subject.find(todo.id)
         }
             .isInstanceOf(TodoNotFoundException::class.java)
